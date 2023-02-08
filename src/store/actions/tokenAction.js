@@ -8,15 +8,16 @@ export const getAccessToken = (payload) => async (dispatch) => {
         const authParams = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
+                'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+                'Access-Control-Allow-Origin': 'http://localhost:3000',
             },
             data:
                 'grant_type=client_credentials&client_id=' +
-                '3c04bbd075a644b6b0208bd9ec18e7ae' +
+                process.env.REACT_APP_SPOTIFY_CLIENT_ID +
                 '&client_secret=' +
-                'f7d2e884f3ce42a7a45944f84a560a4f',
+                process.env.REACT_APP_SPOTIFY_CLIENT_SECRET,
         }
         const token = await axios.post('https://accounts.spotify.com/api/token', authParams)
-        console(token)
         dispatch({
             type: GET_ACCESS_TOKEN,
             payload: { token: token },
