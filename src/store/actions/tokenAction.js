@@ -16,7 +16,7 @@ export const getAccessToken = (payload) => async (dispatch) => {
                 'f7d2e884f3ce42a7a45944f84a560a4f',
         }
         const token = await axios.post('https://accounts.spotify.com/api/token', authParams)
-        alert(token)
+        console(token)
         dispatch({
             type: GET_ACCESS_TOKEN,
             payload: { token: token },
